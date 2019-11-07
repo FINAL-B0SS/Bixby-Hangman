@@ -13,4 +13,7 @@ capsule {
     modern-default-view-behavior
     use-input-views-for-selection-list-detail
   }
+  store-sections {
+    section (GamesAndFun)
+  }
 }
