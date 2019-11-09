@@ -7,7 +7,7 @@ function replaceAll(str, find, replace) {
 function incrementScores(game, correct, guess) {
   if (correct) {
     game.correctGuesses++
-    game.message = 'Nice guess!\n '+guess[0]+' is correct'
+    game.message = 'Nice guess!\n ' + guess[0] + ' is correct'
   } else {
     game.incorrectGuesses++
     if (game.incorrectGuesses != 6) {
@@ -40,7 +40,6 @@ function convertGuess(guess) {
 function checkGuess(game, correct, guess) {
   var tmp = ''
 
-  game.guesses += guess + ' '
   game.template = replaceAll(game.template, '_ ', '_')
   for (var i = 0; i < game.answer.length; i++) {
     if (game.answer[i].toLowerCase() == guess.toLowerCase()) {
@@ -48,6 +47,11 @@ function checkGuess(game, correct, guess) {
       correct = 1
     } else
       tmp += game.template[i]
+  }
+  if (!correct) {
+    if (!game.incorrectLetters)
+      game.incorrectLetters = " "
+    game.incorrectLetters += guess + ' '
   }
   game.template = replaceAll(tmp, '_', '_ ')
   game = incrementScores(game, correct, guess)
@@ -66,8 +70,8 @@ module.exports.function = function updateGame(game, guess) {
         game.template = game.template[0]
       if (guess)
         guess = convertGuess(guess.toLowerCase()).toUpperCase()
-      if (guess && game.guesses.includes(guess))
-        game.message = 'You already tried '+guess[0]+'...'
+      if (guess && ((game.incorrectGuesses && game.incorrectLetters.includes(guess[0])) || game.template.toUpperCase().includes(guess[0])))
+        game.message = 'You already tried ' + guess[0] + '...'
       else if (guess && game.incorrectGuesses != 6)
         game = checkGuess(game, correct, guess[0])
       if (!game.template.includes('_')) {

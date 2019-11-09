@@ -1,5 +1,5 @@
 capsule {
-  id (final_boss.hangman)
+  id (final_boss.hangman_challenge)
   version (0.1.0)
   format (3)
   targets {

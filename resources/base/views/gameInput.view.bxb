@@ -25,10 +25,8 @@ result-view {
 			section {
 				content {
 					if (this.incorrectGuesses == 6 ||  this.message == 'Congratulations, you win!') {
-						single-line {
-							text {
-								value ("New game starting in #{value(this.startFlag)} seconds")
-							}
+						paragraph {
+							value ("New game starting in #{value(this.startFlag)} seconds")
 						}
 					}
 					if (this.incorrectGuesses == 6) {
@@ -48,62 +46,28 @@ result-view {
 						lightbox-enabled (false)
 						object-fit (Contain)
 					}
-					if (exists(this.guesses)) {
+					if (exists(this.incorrectLetters)) {
 						paragraph {
-							value ("Guessed letters: #{value(this.guesses)}")
+							value ("Incorrect letters: #{value(this.incorrectLetters)}")
 							style (Detail_M)
 						}
 					}
-					hbox {
-						content {
-							vbox {
-								content {
-									single-line {
-										text {
-											value ("Correct Guesses")
-											style (Detail_M)
-										}
-									}
-									single-line {
-										text {
-											value ("#{value(correctGuesses)}")
-											style (Detail_M)
-										}
-									}
-								}
-							}
-							vbox {
-								content {
-									single-line {
-										text {
-											value ("Incorrect Guesses")
-											style (Detail_M)
-										}
-									}
-									single-line {
-										text {
-											value ("#{value(incorrectGuesses)} / 6")
-											style (Detail_M)
-										}
-									}
-								}
-							}
-							vbox {
-								content {
-									single-line {
-										text {
-											value ("Category")
-											style (Detail_M)
-										}
-									}
-									single-line {
-										text {
-											value ("#{value(this.category)}")
-											style (Detail_M)
-										}
-									}
-								}
-							}
+					single-line {
+						text {
+							value ("Correct Guesses: #{value(correctGuesses)}")
+							style (Detail_M)
+						}
+					}
+					single-line {
+						text {
+							value ("Incorrect Guesses: #{value(incorrectGuesses)} / 6")
+							style (Detail_M)
+						}
+					}
+					single-line {
+						text {
+							value ("Category: #{value(this.category)}")
+							style (Detail_M)
 						}
 					}
 					if (exists(this.hints)) {

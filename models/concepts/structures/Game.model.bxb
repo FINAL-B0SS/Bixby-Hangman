@@ -39,6 +39,10 @@ structure (Game) {
     type (IncorrectGuesses)
     min (Required) max (One)
   }
+  property (incorrectLetters) {
+    type (IncorrectLetters)
+    min (Optional) max (One)
+  }
   property (startFlag) {
     type (StartFlag)
     min (Required) max (One)

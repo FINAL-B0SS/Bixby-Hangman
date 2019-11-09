@@ -6,10 +6,9 @@ module.exports.function = function fetchGame() {
   game.answer = game.answer.replace(new RegExp(' ', 'g'), '\n')
   game.incorrectGuesses = 0
   game.correctGuesses = 0
-  game.guesses = " "
+  game.startFlag = 0
   game.image = 'images/hangman0.png'
   game.message = "Say a letter"
-  game.startFlag = 0
   game.template = game.answer.replace(/[a-zA-Z]/g, '_ ')
   return game
 }

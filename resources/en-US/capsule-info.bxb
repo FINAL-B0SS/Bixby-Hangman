@@ -1,6 +1,6 @@
 capsule-info {
-  display-name (Hangman)
-  dispatch-name (Hangman)
+  display-name (Hangman Challenge)
+  dispatch-name (Hang Man Challenge)
   developer-name (Final Boss)
   icon-asset (icon.png)
   description ("Try to guess what the mystery word is, one letter at a time. Six incorrect guesses and its game over!")
