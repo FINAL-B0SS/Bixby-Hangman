@@ -4,23 +4,23 @@ result-view {
 	refresh {
 		if (this.message == 'Yikes better luck next time' ||  this.message == 'Congratulations, You win!') {
 			spec {
-				delay-seconds (3)
+				delay-seconds (5)
 				with-request {
 					intent {
 						goal: UpdateGame
 					}
 				}
 			}
-		} else-if (this.startFlag == -1) {
-			spec {
-				delay-seconds (3)
-				with-request {
-					intent {
-						goal: FetchGame
-					}
-				}
-			}
-		}
+		} //else-if (this.startFlag == -1) {
+		// 	spec {
+		// 		delay-seconds (3)
+		// 		with-request {
+		// 			intent {
+		// 				goal: FetchGame
+		// 			}
+		// 		}
+		// 	}
+		// }
 	}
 	
 	render {
@@ -85,7 +85,7 @@ result-view {
 									}
 									single-line {
 										text {
-											value ("#{value(incorrectGuesses)}")
+											value ("#{value(incorrectGuesses)} / 6")
 											style (Detail_M)
 										}
 									}
@@ -131,16 +131,6 @@ result-view {
 												style (Detail_M)
 											}
 										}
-										for-each (this.hints) {
-											as (hint) {
-												single-line {
-													text {
-														value ("#{value(hint)}")
-														style (Detail_M)
-													}
-												}
-											}
-										}
 									}
 								}
 								vbox {
@@ -153,6 +143,14 @@ result-view {
 										}
 									}
 								}
+							}
+						}
+					}
+					for-each (this.hints) {
+						as (hint) {
+							paragraph {
+								value ("• #{value(hint)}\n")
+								style (Detail_M)
 							}
 						}
 					}
