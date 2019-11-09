@@ -47,6 +47,8 @@ module.exports.function = function updateGame(game, guess) {
         game.guesses = game.guesses[0]
       if (typeof game.template == 'object')
         game.template = game.template[0]
+      if (guess)
+        guess = guess.toUpperCase()
       if (guess && game.guesses.includes(guess))
         game.message = 'You already tried ' + guess[0] + ' 😑'
       else if (guess && game.incorrectGuesses != 6)

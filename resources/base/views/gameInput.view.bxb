@@ -37,12 +37,12 @@ result-view {
 					if (this.incorrectGuesses == 6) {
 						paragraph {
 							value ("#{value(this.answer)}")
-							style (Detail_M)
+							style (Detail_L)
 						}
 					} else {
 						paragraph {
 							value ("#{value(this.template)}")
-							style (Detail_M)
+							style (Detail_L)
 						}
 					}
 					image {
