@@ -3,7 +3,7 @@ capsule-info {
   dispatch-name (Hangman)
   developer-name (Final Boss)
   icon-asset (icon.png)
-  description ("Try to guess what the mystery word is, one letter at a time. Six incorrect guesses and it's over!")
+  description ("Try to guess what the mystery word is, one letter at a time. Six incorrect guesses and its game over!")
   search-keywords {
     keyword (Hangman)
     keyword (Guess)

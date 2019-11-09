@@ -3,6 +3,7 @@ var http = require('http')
 module.exports.function = function fetchGame() {
   var game = http.getUrl('https://raw.githubusercontent.com/Maljean/Bixby-Hangman/master/Games.json', { format: 'json' })
   game = game[Math.floor(Math.random() * game.length)]
+  game.answer = game.answer.replace(new RegExp(' ', 'g'), '\n')
   game.incorrectGuesses = 0
   game.correctGuesses = 0
   game.guesses = " "

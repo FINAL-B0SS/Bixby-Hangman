@@ -7,21 +7,38 @@ function replaceAll(str, find, replace) {
 function incrementScores(game, correct, guess) {
   if (correct) {
     game.correctGuesses++
-    game.message = "Nice guess!"
+    game.message = 'Nice guess!\n '+guess[0]+' is correct'
   } else {
     game.incorrectGuesses++
     if (game.incorrectGuesses != 6) {
       game.message = 'Sorry there\'s no ' + guess
     } else {
-      game.message = 'Yikes better luck next time'
+      game.message = 'Game over, you lose'
       game.startFlag = 5
     }
   }
   return game
 }
 
+function convertGuess(guess) {
+  var asrKey = {
+    c: ['see', 'sea'],
+    n: ['end'],
+    e: ['he'],
+    n: ['end'],
+    r: ['are'],
+    u: ['you'],
+    y: ['why']
+  }
+
+  for (key in asrKey)
+    if (asrKey[key].indexOf(guess) > -1)
+      return key
+  return guess
+}
+
 function checkGuess(game, correct, guess) {
-  var tmp = ""
+  var tmp = ''
 
   game.guesses += guess + ' '
   game.template = replaceAll(game.template, '_ ', '_')
@@ -42,19 +59,19 @@ module.exports.function = function updateGame(game, guess) {
   var correct = 0
 
   if (game.startFlag) {
-    if (game.message != 'Congratulations, You win!' && game.message != 'Yikes better luck next time') {
+    if (game.message != 'Congratulations, you win!' && game.message != 'Game over, you lose') {
       if (typeof game.guesses == 'object')
         game.guesses = game.guesses[0]
       if (typeof game.template == 'object')
         game.template = game.template[0]
       if (guess)
-        guess = guess.toUpperCase()
+        guess = convertGuess(guess.toLowerCase()).toUpperCase()
       if (guess && game.guesses.includes(guess))
-        game.message = 'You already tried ' + guess[0] + ' 😑'
+        game.message = 'You already tried '+guess[0]+'...'
       else if (guess && game.incorrectGuesses != 6)
         game = checkGuess(game, correct, guess[0])
       if (!game.template.includes('_')) {
-        game.message = 'Congratulations, You win!'
+        game.message = 'Congratulations, you win!'
         game.startFlag = 5
       }
     } else {

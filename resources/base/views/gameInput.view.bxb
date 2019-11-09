@@ -2,7 +2,7 @@ result-view {
 	match: Game (this)
 	
 	refresh {
-		if (this.incorrectGuesses == 6 ||  this.message == 'Congratulations, You win!') {
+		if (this.incorrectGuesses == 6 ||  this.message == 'Congratulations, you win!') {
 			spec {
 				delay-seconds (this.startFlag)
 				with-request {
@@ -24,7 +24,7 @@ result-view {
 		layout {
 			section {
 				content {
-					if (this.incorrectGuesses == 6 ||  this.message == 'Congratulations, You win!') {
+					if (this.incorrectGuesses == 6 ||  this.message == 'Congratulations, you win!') {
 						single-line {
 							text {
 								value ("New game starting in #{value(this.startFlag)} seconds")
