@@ -2,32 +2,29 @@ result-view {
 	match: Game (this)
 	
 	refresh {
-		if (this.message == 'Yikes better luck next time' ||  this.message == 'Congratulations, You win!') {
+		if (this.incorrectGuesses == 6 ||  this.message == 'Congratulations, You win!') {
 			spec {
-				delay-seconds (5)
+				delay-seconds (this.startFlag)
 				with-request {
-					intent {
-						goal: UpdateGame
+					if (this.startFlag == 0) {
+						intent {
+							goal: FetchGame
+						}
+					} else {
+						intent {
+							goal: UpdateGame
+						}
 					}
 				}
 			}
-		} //else-if (this.startFlag == -1) {
-		// 	spec {
-		// 		delay-seconds (3)
-		// 		with-request {
-		// 			intent {
-		// 				goal: FetchGame
-		// 			}
-		// 		}
-		// 	}
-		// }
+		}
 	}
 	
 	render {
 		layout {
 			section {
 				content {
-					if (this.message == 'Yikes better luck next time' ||  this.message == 'Congratulations, You win!') {
+					if (this.incorrectGuesses == 6 ||  this.message == 'Congratulations, You win!') {
 						single-line {
 							text {
 								value ("New game starting in #{value(this.startFlag)} seconds")
