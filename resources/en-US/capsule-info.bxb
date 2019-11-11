@@ -1,6 +1,10 @@
 capsule-info {
   display-name (Hangman Challenge)
-  dispatch-name (Hang Man Challenge)
+  dispatch-name (Hangman Challenge)
+  dispatch-aliases {
+    // ASR leaves out the space and keeps the space an even number of times
+    alias (Hang Man Challenge)
+  }
   developer-name (Final Boss)
   icon-asset (icon.png)
   description ("Try to guess what the mystery word is, one letter at a time. Six incorrect guesses and its game over!")
