@@ -12,6 +12,7 @@ function updateMessage(game, guess) {
   } else if (game.incorrectGuesses != 6) {
     game.message = 'Sorry there\'s no ' + guess[0]
   }
+  game.image = 'images/hangman' + game.incorrectGuesses + '.png'
   return game
 }
 
@@ -61,7 +62,6 @@ function checkGuess(game, correct, guess) {
     game.incorrectLetters += guess + ' '
   game.template = replaceAll(tmp, '_', '_ ')
   game = incrementScores(game, correct, guess)
-  game.image = 'images/hangman' + game.incorrectGuesses + '.png'
   return game
 }
 
@@ -73,12 +73,13 @@ module.exports.function = function updateGame(game, guess) {
       if (guess) {
         guess = convertGuess(guess.toLowerCase()).toUpperCase()
         console.log(guess)
-        if (guess == 'NEW GAME') {
+        if (guess.includes('NEW GAME')) {
           game = fetchGame()
           game.startFlag = 1
           return game
-        } else if (guess == 'GIVE UP') {
+        } else if (guess.includes('GIVE UP')) {
           game.incorrectGuesses = 6
+          game.incorrectLetters = 'Q U I T E R 💔'
           return updateMessage(game, guess)
         } else if (replaceAll(guess, ' ', '\n') == game.answer.toUpperCase()) {
           game.template = game.answer
