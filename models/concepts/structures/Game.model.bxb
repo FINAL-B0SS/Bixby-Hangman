@@ -13,7 +13,7 @@ structure (Game) {
   }
   property (guesses) {
     type (Guess)
-    min (Optional) max (Many)
+    min (Optional) max (One)
   }
   property (image) {
     type (Image)
@@ -21,7 +21,7 @@ structure (Game) {
   }
   property (template) {
     type (Template)
-    min (Required) max (Many)
+    min (Required) max (One)
   }
   property (message) {
     type (Message)

@@ -1,0 +1,5 @@
+train (t-s3jwucca1r1xdldkyk1f4iez9) {
+  utterance ("[g:UpdateGame:continue] (one two three four five six seven eight nine ten)[v:Guess]")
+  plan (Y2BhUEzLzEvMiU/KLy7Wy0jMS89NzItPzkjMyUnNS0/Vc0/MTWVQx6sktCAlsSQVrJAIs5TwKylNLS5mYGZgZGACkgxAGgQhgAnIAooBAA==)
+  last-modified (1573531364178)
+}

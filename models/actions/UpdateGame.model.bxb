@@ -9,10 +9,16 @@ action (UpdateGame) {
 					goal: FetchGame
 				}
 			}
+			default-select {
+				with-rule {
+					select-first
+				}
+			}
 		}
 		input (guess) {
 			type (Guess)
 			min (Optional) max (One)
+			
 		}
 	}
 	output (Game)

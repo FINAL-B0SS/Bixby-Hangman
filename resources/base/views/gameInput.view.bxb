@@ -1,6 +1,15 @@
 result-view {
 	match: Game (this)
 	
+	conversation-drivers {
+		conversation-driver {
+			template (New Game)
+		}
+		conversation-driver {
+			template (Give Up)
+		}
+	}
+
 	refresh {
 		if (this.incorrectGuesses == 6 ||  this.message == 'Congratulations, you win!') {
 			spec {

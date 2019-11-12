@@ -1,6 +1,8 @@
 var http = require('http')
+var console = require('console')
 
-module.exports.function = function fetchGame() {
+module.exports = function fetchGame() {
+  console.log('test')
   var game = http.getUrl('https://raw.githubusercontent.com/Maljean/Bixby-Hangman/master/Games.json', { format: 'json' })
   game = game[Math.floor(Math.random() * game.length)]
   game.answer = game.answer.replace(new RegExp(' ', 'g'), '\n')

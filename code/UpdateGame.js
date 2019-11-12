@@ -1,21 +1,28 @@
 var console = require('console')
+var fetchGame = require('./FetchGame')
 
 function replaceAll(str, find, replace) {
   return str.replace(new RegExp(find, 'g'), replace);
 }
 
+function updateMessage(game, guess) {
+  if (game.incorrectGuesses == 6) {
+    game.message = 'Game over, you lose'
+    game.startFlag = 5
+  } else if (game.incorrectGuesses != 6) {
+    game.message = 'Sorry there\'s no ' + guess[0]
+  }
+  return game
+}
+
 function incrementScores(game, correct, guess) {
   if (correct) {
     game.correctGuesses++
+    game = updateMessage(game, guess)
     game.message = 'Nice guess!\n ' + guess[0] + ' is correct'
   } else {
     game.incorrectGuesses++
-    if (game.incorrectGuesses != 6) {
-      game.message = 'Sorry there\'s no ' + guess
-    } else {
-      game.message = 'Game over, you lose'
-      game.startFlag = 5
-    }
+    game = updateMessage(game, guess)
   }
   return game
 }
@@ -48,11 +55,10 @@ function checkGuess(game, correct, guess) {
     } else
       tmp += game.template[i]
   }
-  if (!correct) {
-    if (!game.incorrectLetters)
-      game.incorrectLetters = " "
+  if (!game.incorrectLetters)
+    game.incorrectLetters = ' '
+  if (!correct)
     game.incorrectLetters += guess + ' '
-  }
   game.template = replaceAll(tmp, '_', '_ ')
   game = incrementScores(game, correct, guess)
   game.image = 'images/hangman' + game.incorrectGuesses + '.png'
@@ -64,23 +70,34 @@ module.exports.function = function updateGame(game, guess) {
 
   if (game.startFlag) {
     if (game.message != 'Congratulations, you win!' && game.message != 'Game over, you lose') {
-      if (typeof game.guesses == 'object')
-        game.guesses = game.guesses[0]
-      if (typeof game.template == 'object')
-        game.template = game.template[0]
-      if (guess)
+      if (guess) {
         guess = convertGuess(guess.toLowerCase()).toUpperCase()
-      if (guess && ((game.incorrectGuesses && game.incorrectLetters.includes(guess[0])) || game.template.toUpperCase().includes(guess[0])))
-        game.message = 'You already tried ' + guess[0] + '...'
-      else if (guess && game.incorrectGuesses != 6)
-        game = checkGuess(game, correct, guess[0])
+        console.log(guess)
+        if (guess == 'NEW GAME') {
+          game = fetchGame()
+          game.startFlag = 1
+          return game
+        } else if (guess == 'GIVE UP') {
+          game.incorrectGuesses = 6
+          return updateMessage(game, guess)
+        } else if (replaceAll(guess, ' ', '\n') == game.answer.toUpperCase()) {
+          game.template = game.answer
+          game.correctGuesses++
+          game.message = 'Congratulations, you win!'
+          game.startFlag = 5
+          return game
+        } else if ((game.incorrectGuesses && game.incorrectLetters.includes(guess[0])) || game.template.toUpperCase().includes(guess[0])) {
+          game.message = 'You already used ' + guess[0] + '...'
+        } else if (game.incorrectGuesses != 6) {
+          game = checkGuess(game, correct, guess[0])
+        }
+      }
       if (!game.template.includes('_')) {
         game.message = 'Congratulations, you win!'
         game.startFlag = 5
       }
-    } else {
+    } else
       game.startFlag--
-    }
   }
   !game.startFlag ? game.startFlag = 1 : 0
 
