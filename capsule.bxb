@@ -1,5 +1,6 @@
 capsule {
   id (final_boss.hangman_challenge)
+  default-action (UpdateGame)
   version (0.1.0)
   format (3)
   targets {
@@ -14,8 +15,10 @@ capsule {
     use-input-views-for-selection-list-detail
     allow-dialogs-on-detail-pages
   }
-  default-action (UpdateGame)
   store-sections {
     section (GamesAndFun)
+  }
+  store-countries {
+    all
   }
 }
